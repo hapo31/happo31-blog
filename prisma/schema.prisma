@@ -1,0 +1,19 @@
+datasource db {
+  url      = env("MYSQL_HOST")
+  database = env("MYSQL_DATABASE")
+  provider = "mysql"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model article {
+  id  Int @id @default(autoincrement())
+  created_at DateTime @default(now())
+  title String @db.VarChar(128)
+  private Boolean @default(true)
+  published Boolean @default(true)
+  body Bytes @db.Blob
+  snippet String @db.VarChar(128)
+}
